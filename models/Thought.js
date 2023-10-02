@@ -3,33 +3,25 @@ const { Schema, model } = require('mongoose');
 // Schema to create a course model
 const courseSchema = new Schema(
   {
-    courseName: {
+    thoughtText: {
       type: String,
       required: true,
     },
-    inPerson: {
-      type: Boolean,
-      default: true,
-    },
-    startDate: {
+    createdAt: {
       type: Date,
       default: Date.now(),
     },
-    endDate: {
-      type: Date,
-      // Sets a default value of 12 weeks from now
-      default: () => new Date(+new Date() + 84 * 24 * 60 * 60 * 1000),
+    username: {
+      type: String,
+      required: true,
     },
-    students: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Student',
-      },
-    ],
   },
   {
     toJSON: {
       virtuals: true,
+
+      // Need to add getter to format time
+
     },
     id: false,
   }
