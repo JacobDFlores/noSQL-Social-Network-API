@@ -49,6 +49,12 @@ module.exports = {
         res.status(404).json({ message: 'No thought with that ID' });
       }
 
+      await User.findOneAndUpdate(
+        { _id: req.params.userId },
+        { $pull: { thoughts:  req.params.thoughtId  } },
+        { runValidators: true, new: true }
+      );
+
       // await Student.deleteMany({ _id: { $in: course.students } });
       res.json({ message: 'Thought deleted!' });
     } catch (err) {
